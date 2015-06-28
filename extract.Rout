@@ -1,0 +1,56 @@
+
+R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> if(!require(yaml)){install.packages("yaml")}
+Loading required package: yaml
+> if(!require(RCurl)){install.packages("RCurl")}
+Loading required package: RCurl
+Loading required package: bitops
+> 
+> library(yaml)
+> library(RCurl)
+> 
+> 
+> config = yaml.load_file("config.yml")
+> cred = paste(config$ftp$user,config$ftp$password,sep = ":")
+> path.files= paste(config$ftp$host,config$ftp$serverDir,sep = "/")
+> file.zip=getURL(path.files,userpwd=cred,ftp.use.epsv=F,dirlistonly=T)
+> 
+> 
+> bin<-getBinaryURL(paste(path.files,substr(file.zip,0,nchar(file.zip)-1),sep=''),userpwd=cred,ftp.use.epsv=F)
+> if(length(bin)<10){stop('no zip file found at FTP Site or File cannot be download from ftp')}
+> 
+> writeBin(bin, "stocks.zip") 
+> if(!file.exists('stocks.zip')){stop('cannot create a valid FTP file')}
+> 
+> if (file.exists(config$ftp$downloadDir)){
++   dir.create(config$ftp$downloadDir)
++ }
+Warning message:
+In dir.create(config$ftp$downloadDir) : 'csv' already exists
+> 
+> unzip("stocks.zip",exdir = config$ftp$downloadDir)
+> file.remove("stocks.zip")
+[1] TRUE
+> 
+> proc.time()
+   user  system elapsed 
+  0.437   0.023   0.521 

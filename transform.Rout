@@ -1,0 +1,36 @@
+
+R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> if(!require(yaml)){install.packages("yaml")}
+Loading required package: yaml
+> library(yaml)
+> 
+> config = yaml.load_file("config.yml")
+> setwd(config$ftp$downloadDir)
+> 
+> data.tables<-list.files(pattern="\\.csv",recursive=T)
+> 
+> df.options<-read.csv(data.tables[1],stringsAsFactors = F)[2:20]
+> if(df)
++ colnames(df.options)<-c("underlying","underlying_last_price","exchange","option_symbol","option_type","expiration_date","quote_date","strike_price","last_price","bid_price","ask_price","volume","open_interest","implied_volatility","delta","gamma","theta","vega","data_load_date")
+Error in if (df) colnames(df.options) <- c("underlying", "underlying_last_price",  : 
+  argument is not interpretable as logical
+Execution halted

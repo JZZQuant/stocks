@@ -12,7 +12,10 @@ file.zip=getURL(path.files,userpwd=cred,ftp.use.epsv=F,dirlistonly=T)
 
 
 bin<-getBinaryURL(paste(path.files,substr(file.zip,0,nchar(file.zip)-1),sep=''),userpwd=cred,ftp.use.epsv=F)
-writeBin(bin, "stocks.zip")  
+if(length(bin)<10){stop('no zip file found at FTP Site or File cannot be download from ftp')}
+
+writeBin(bin, "stocks.zip") 
+if(!file.exists('stocks.zip')){stop('cannot create a valid FTP file')}
 
 if (file.exists(config$ftp$downloadDir)){
   dir.create(config$ftp$downloadDir)
