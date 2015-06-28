@@ -1,0 +1,15 @@
+ftp:
+  host: ftp://localhost
+  user: pluto
+  password: hendrix
+  serverDir: files/stocks/
+  downloadDir: csv
+  
+db:
+  host: localhost
+  user: root
+  password: hendrix
+  database: stocks
+  options_eod_table: eod_options
+  optionstats_eod_table: eod_option_stats
+  stockquotes_eod_table: eod_stocks
