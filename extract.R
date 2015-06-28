@@ -19,3 +19,4 @@ if (file.exists(config$ftp$downloadDir)){
 }
 
 unzip("stocks.zip",exdir = config$ftp$downloadDir)
+file.remove("stocks.zip")

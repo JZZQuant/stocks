@@ -1,7 +1,4 @@
-if(!require(RMySQL)){install.packages("RMySQL")}
-library(RMySQL)
 
-mydb = dbConnect(MySQL(), user=config$db$user, password=config$db$password, dbname=config$db$database, host=config$db$host)
 setwd(config$ftp$downloadDir)
 
 data.tables<-list.files(pattern="\\.csv",recursive=T)
@@ -23,4 +20,5 @@ df.options<-transform(df.options,expiration_date=as.character(as.Date(df.options
 df.stats<-transform(df.stats,quote_date=paste(substr(df.stats$quote_date,0,4),substr(df.stats$quote_date,5,6),substr(df.stats$quote_date,7,8),sep='-'),data_load_date=as.character(Sys.Date()))
 df.stocks<-transform(df.stocks,quote_date=as.character(as.Date(df.stocks$quote_date,"%m/%d/%Y")),data_load_date=as.character(Sys.Date()))
 
-
+file.remove(data.tables)
+setwd('..')
