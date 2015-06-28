@@ -8,6 +8,7 @@ mydb = dbConnect(MySQL(), user=config$db$user, password=config$db$password, dbna
 if(length(mydb) <1){stop("Database connection could not be made")}
 setwd(config$ftp$downloadDir)
 
+# write data to mysql table
 x<-dbWriteTable(mydb, name='options_eod_table',row.names = FALSE, value=df.options,overwrite = FALSE, append = TRUE,header = F)
 if(!x){stop("options_eod_table Data could not be written correctly")}
 y<-dbWriteTable(mydb, name='optionstats_eod_table',row.names = FALSE, value=df.stats,overwrite = FALSE, append = TRUE,header = F)
