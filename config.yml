@@ -1,14 +1,14 @@
 ftp:
   host: ftp://localhost
   user: pluto
-  password: hendrix
+  password: password
   serverDir: files/stocks/
   downloadDir: csv
   
 db:
   host: localhost
   user: root
-  password: hendrix
+  password: password
   database: stocks
   options_eod_table: eod_options
   optionstats_eod_table: eod_option_stats
