@@ -23,7 +23,7 @@ setwd('..')
 
 batchwritetable<-function(db,table,df,size)
 {
-  df.batches<-split(dfrm, (0:nrow(df) %/% size))
+  df.batches<-split(df, (0:nrow(df) %/% size))
   apply(df.batches,1,function(batch) 
     {  
   x<-dbWriteTable(db, name=table,row.names = FALSE, value=batch,overwrite = FALSE, append = TRUE,header = F)
