@@ -1,6 +1,12 @@
 ubuntu needs few curl related packages for accessing ftp
 sudo apt-get install libcurl4-gnutls-dev libmysqlclient-dev
 
+also start my sql service with innodb_autoinc_lock_mode=2 using the command line ,this is a one time activity during the life time of mysql
+mysql> mysqladmin innodb_autoinc_lock_mode=2 -u root -p
+
+dbwritesql does bulk inserts of data frame :
+https://github.com/rstats-db/RMySQL/blob/master/R/table.R#L104 
+
 execute.sh takes two parameters first parameter takes the path were log files should be output.second parameters decides if logs should be out to console.
 
 Individual scripts are completely independent of each other as long as the parameter in config file are correctly adhered to.
