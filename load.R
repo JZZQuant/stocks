@@ -12,9 +12,16 @@ setwd(config$ftp$downloadDir)
 # so we just need to set the auto increment to 2 (this has to be done before executing the script)
 
 # write data to mysql table
+#These presetup tasks can even be set inside the batchwritetable method to improve 
+#loggin and error reporting , but if performance is your priority then they better be left here
+dbSendQuery(mydb, 'SET unique_checks=0;')
+dbSendQuery(mydb, 'START TRANSACTION;')
+
 batchwritetable(mydb,'options_eod_table',df.options,1000)
 batchwritetable(mydb,'optionstats_eod_table',df.stats,1000)
 batchwritetable(mydb,'stockquotes_eod_table',df.stocks,1000)
+dbSendQuery(mydb, 'COMMIT;')
+dbSendQuery(mydb, 'SET unique_checks=1;')
 
 dbDisconnect(mydb)
 
